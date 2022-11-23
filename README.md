@@ -9,13 +9,13 @@
 
 5. Create website Layout
 
-   1. Create layout component
-   2. Add header
-   3. Add main section
-   4. Add footer
-   5. Add tailwind classes
+   - Create layout component
+   - Add header
+   - Add main section
+   - Add footer
+   - Add tailwind classes
 
 6. List Products
-   1. Add data.js
-   2. Add images
-   3. Render products
+   - Add data.js
+   - Add images
+   - Render products
