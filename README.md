@@ -29,3 +29,13 @@
    - Details in 2nd column
    - Show add to cart action on third column
    - add styles
+
+8. Handle Add to Cart
+   Create Store.js under utils folder (To define useContext, initialState, reducer and StoreProvider)
+   - Define react context
+   - Define cart items state
+   - Create add to cart action
+   - Add reducer
+   - Create store provider
+   - Handle add to cart button
+   - Add badge beside cart to show number of items added

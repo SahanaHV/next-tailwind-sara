@@ -1,12 +1,15 @@
 import Image from 'next/image';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
-import React from 'react';
+import React, { useContext } from 'react';
 
 import Layout from '../../components/Layout';
 import { data } from '../../utils/data';
+import { Store } from '../../utils/Store';
 
 export default function ProductScreen() {
+  const { state, dispatch } = useContext(Store);
+
   const { query } = useRouter();
   const { slug } = query;
 
@@ -15,6 +18,18 @@ export default function ProductScreen() {
   if (!product) {
     return <div>product Not Found</div>;
   }
+
+  const addToCartHandler = () => {
+    // for adding same product multiple times
+    const existItem = state.cart.cartItems.find((x) => x.slug === product.slug);
+    const quantity = existItem ? existItem.quantity + 1 : 1;
+
+    if (product.countInStock < quantity) {
+      alert('Sorry Product is out of stock');
+    }
+    // parameter to dispatch we have type and payload
+    dispatch({ type: 'CART_ADD-ITEM', payload: { ...product, quantity } });
+  };
   return (
     <Layout title={product.name}>
       <div className="py-2">
@@ -54,7 +69,12 @@ export default function ProductScreen() {
                 ${product.countInStock > 0 ? 'In stock' : 'out of stock'}
               </div>
             </div>
-            <button className="primary-button w-full">Add to cart</button>
+            <button
+              className="primary-button w-full"
+              onClick={addToCartHandler}
+            >
+              Add to cart
+            </button>
           </div>
         </div>
       </div>
